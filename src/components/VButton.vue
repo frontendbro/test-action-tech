@@ -1,5 +1,5 @@
 <script>
-// import FlIcon from '../icon/FlIcon'
+import VIcon from '@/components/Icon/VIcon'
 
 export default {
   name: 'VButton',
@@ -77,7 +77,7 @@ export default {
 
     return h(context.props.tag, context.data, [
       context.props.icon &&
-        h(FlIcon, {
+        h(VIcon, {
           class: defineClassForIcon(),
           props: {
             name: context.props.icon,

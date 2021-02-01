@@ -5,7 +5,10 @@
     </div>
     <div v-if="date.length" class="task-item-date">
       <div class="task-item-date__label">Дней до завершения:</div>
-      <div class="task-item-date__count" :class="{ 'task-item-date__count_red': dateFormat.diff($date(), 'day') < 0 }">
+      <div
+        class="task-item-date__count"
+        :class="{ 'task-item-date__count_red': dateFormat.diff(this.$date(), 'day') < 0 }"
+      >
         {{ dateFormat.diff($date(), 'day') > 0 ? dateFormat.diff($date(), 'day') : 'Время вышло' }}
       </div>
     </div>

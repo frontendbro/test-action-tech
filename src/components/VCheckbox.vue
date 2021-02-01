@@ -69,26 +69,23 @@ export default {
     background: #42b983;
     color: #fff;
   }
-}
-
-.v-checkbox__input {
-  position: absolute;
-  z-index: -1;
-  margin: 0;
-  outline: none;
-  opacity: 0;
-}
-
-.v-checkbox__custom-box {
-  border: 1px #606060 solid;
-  border-radius: 3px;
-  cursor: pointer;
-  fill: lightslategrey;
-}
-
-.v-checkbox__text {
-  margin-left: 12px;
-  cursor: pointer;
+  &__input {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    outline: none;
+    opacity: 0;
+  }
+  &__custom-box {
+    border: 1px #606060 solid;
+    border-radius: 3px;
+    cursor: pointer;
+    fill: lightslategrey;
+  }
+  &__text {
+    margin-left: 12px;
+    cursor: pointer;
+  }
 }
 
 .small {

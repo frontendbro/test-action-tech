@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <div class="home-title">
-      Привет <span class="home-title__name">{{ userData.login }}</span>!
+      Привет <span class="home-title__name">{{ userData.login }}</span
+      >!
     </div>
     <ul class="home-task-list" v-if="taskList.length">
       <TaskItem

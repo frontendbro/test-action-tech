@@ -20,7 +20,7 @@
         }"
         @keydown.esc="closeModal"
       >
-        <div class="v-modal-header__close" @click="closeModal">×</div>
+        <VIcon name="close" class="v-modal-header__close" @click="closeModal" />
         <div class="v-modal-header">
           <h2 v-if="title" class="v-modal-title">
             {{ title }}
@@ -39,9 +39,11 @@
 
 <script>
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
+import VIcon from '@/components/Icon/VIcon'
 
 export default {
   name: 'FlModal',
+  components: { VIcon },
   props: {
     title: {
       type: String,
@@ -53,7 +55,7 @@ export default {
     },
     listBreadcrumbs: {
       type: Array,
-      default: () => ([])
+      default: () => []
     },
     isOpen: {
       type: Boolean,
@@ -160,6 +162,7 @@ export default {
   top: 25px;
   right: 25px;
   z-index: 3;
+  fill: #333;
   cursor: pointer;
 }
 

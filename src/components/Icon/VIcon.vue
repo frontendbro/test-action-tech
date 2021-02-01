@@ -6,18 +6,14 @@
     :viewBox="getDataSvg.viewBox"
     v-on="$listeners"
   >
-    <path
-      fill="inherit"
-      fill-rule="evenodd"
-      :d="getDataSvg.d"
-    />
+    <path fill="inherit" fill-rule="evenodd" :d="getDataSvg.d" />
   </svg>
 </template>
 <script>
 import mapIcon from './mapIcon'
 
 export default {
-  name: 'FlIcon',
+  name: 'VIcon',
   props: {
     name: {
       type: String,
@@ -34,7 +30,7 @@ export default {
   },
 
   computed: {
-    getDataSvg () {
+    getDataSvg() {
       return mapIcon[this.name]
     }
   }
