@@ -117,8 +117,16 @@ export default {
 }
 
 .is-default {
-  height: auto;
-  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f14848;
+  color: #fff;
+  padding: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  line-height: 1;
 }
 
 .is-primary {

@@ -1,16 +1,19 @@
 <template>
   <li class="task-item">
     <div class="task-item__title" :style="{ textDecoration: state ? 'line-through' : 'none' }">{{ title }}</div>
-    <VCheckbox v-model="state" @checked="handleChecked" />
+    <VCheckbox class="task-item__checkbox" v-model="state" @checked="handleChecked" />
+    <VButton title="×" @click="deleteTask(id)" />
   </li>
 </template>
 
 <script>
 import VCheckbox from '@/components/VCheckbox'
+import VButton from '@/components/VButton'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'TaskItem',
-  components: { VCheckbox },
+  components: { VButton, VCheckbox },
   props: {
     title: {
       type: String,
@@ -35,9 +38,12 @@ export default {
     this.state = this.status
   },
   methods: {
+    ...mapActions(['DeleteTask']),
     handleChecked(e) {
-      console.info('e', e, this.id)
       this.checked = !e
+    },
+    deleteTask(id) {
+      this.DeleteTask(id)
     }
   }
 }
@@ -54,6 +60,12 @@ export default {
   }
   &__title {
     margin-right: 10px;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: left;
+  }
+  &__checkbox {
+    margin-right: 12px;
   }
 }
 </style>

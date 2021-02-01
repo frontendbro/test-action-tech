@@ -13,7 +13,26 @@ export default new Vuex.Store({
       { id: 5, title: 'Купить ёршик', status: true }
     ]
   },
-  mutations: {},
-  actions: {},
+  actions: {
+    CreateTask({ commit }, payload) {
+      const newTask = {
+        id: Math.floor(Math.random() * 100),
+        title: payload,
+        status: false
+      }
+      commit('CREATE_TASK', newTask)
+    },
+    DeleteTask({ commit }, payload) {
+      commit('DELETE_TASK', payload)
+    }
+  },
+  mutations: {
+    CREATE_TASK: (state, payload) => {
+      state.taskList.push(payload)
+    },
+    DELETE_TASK: (state, payload) => {
+      state.taskList = state.taskList.filter(item => item.id !== payload)
+    }
+  },
   modules: {}
 })

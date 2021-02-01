@@ -2,7 +2,7 @@
   <transition name="fade">
     <div
       v-if="isOpen"
-      class="fl-modal-layout"
+      class="v-modal-layout"
       :class="{
         background: isBackground
       }"
@@ -13,28 +13,23 @@
           handler: clickAway,
           events: ['mousedown']
         }"
-        class="fl-modal"
+        class="v-modal"
         :class="{
-          'full-page' : isFullPage,
-          'content-center' : isContentCenter,
-          'margin-header': !listBreadcrumbs.length
+          'full-page': isFullPage,
+          'content-center': isContentCenter
         }"
         @keydown.esc="closeModal"
       >
-        <fl-icon name="close" class="fl-modal-header__close" @click="closeModal" />
-        <div class="fl-modal-header">
-          <fl-breadcrumbs
-            v-if="listBreadcrumbs.length"
-            :list-breadcrumbs="listBreadcrumbs"
-          />
-          <h2 v-if="title" class="fl-modal-title">
+        <div class="v-modal-header__close" @click="closeModal">×</div>
+        <div class="v-modal-header">
+          <h2 v-if="title" class="v-modal-title">
             {{ title }}
           </h2>
-          <div v-if="description" class="fl-modal-description">
+          <div v-if="description" class="v-modal-description">
             {{ description }}
           </div>
         </div>
-        <div ref="body" class="fl-modal-body">
+        <div ref="body" class="v-modal-body">
           <slot name="body" />
         </div>
       </div>
@@ -43,14 +38,10 @@
 </template>
 
 <script>
-import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-
-import FlIcon from '../icon/FlIcon'
-import FlBreadcrumbs from '../FlBreadcrumbs'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 export default {
   name: 'FlModal',
-  components: { FlBreadcrumbs, FlIcon },
   props: {
     title: {
       type: String,
@@ -94,7 +85,7 @@ export default {
   },
 
   watch: {
-    isOpen (value) {
+    isOpen(value) {
       this.$nextTick(() => {
         if (this.$refs.modal && value) {
           disableBodyScroll(this.$refs.modal)
@@ -104,7 +95,7 @@ export default {
       })
     },
 
-    adaptiveBody (value) {
+    adaptiveBody(value) {
       if (value) {
         this.setHeightBody()
         window.addEventListener('resize', this.setHeightBody)
@@ -116,14 +107,14 @@ export default {
   },
 
   methods: {
-    clickAway () {
+    clickAway() {
       if (this.isClickAwayClose) this.closeModal()
     },
-    closeModal () {
+    closeModal() {
       this.$emit('close')
     },
 
-    setHeightBody () {
+    setHeightBody() {
       if (this.$refs.modal && this.$refs.body) {
         this.$refs.body.style.height = this.$refs.modal.clientHeight * 0.9 - 50 + 'px'
       }
@@ -132,32 +123,39 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.fl-modal-layout {
+<style lang="less" scoped>
+.v-modal-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1001;
   width: 100%;
   height: 100%;
-
-  @include flex-center;
 }
 
-.fl-modal {
+.v-modal {
   position: relative;
   box-sizing: border-box;
   width: 630px;
   max-height: 99%;
-  padding: 50px 40px 40px;
+  padding: 20px;
   overflow-y: scroll;
-  background: $light-01;
-  border-radius: $border-radius;
+  background: #fff;
+  border-radius: 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-appearance: none;
 
-  @include hidden-scrollbar;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.fl-modal-header__close {
+.v-modal-header__close {
   position: absolute;
   top: 25px;
   right: 25px;
@@ -165,32 +163,28 @@ export default {
   cursor: pointer;
 }
 
-.fl-modal-header {
-  @include flex-column;
+.v-modal-header {
+  display: flex;
+  flex-direction: column;
 }
 
-.margin-header {
-  padding-top: 70px;
-}
-
-.fl-modal-title {
+.v-modal-title {
   margin-bottom: 10px;
-  font-size: 44px;
+  font-size: 24px;
   letter-spacing: -0.88px;
 }
 
-.fl-modal-description {
+.v-modal-description {
   margin-bottom: 40px;
-  color: $black-02;
+  color: #222222;
 }
 
-.fl-modal-body {
+.v-modal-body {
   width: 100%;
-  height: 100%;
 }
 
 .background {
-  background: rgba($black-01, 0.2);
+  background: rgba(#000, 0.2);
 }
 
 .full-page {
@@ -202,31 +196,25 @@ export default {
   border-radius: 0;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.2s;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
 .content-center {
-  @include flex-center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .fl-modal-body {
-    @include flex-center;
-  }
-}
-
-@include media-max-md {
-  .fl-modal-title {
-    margin-top: 10px;
-    font-size: 26px;
-  }
-
-  .fl-modal-description {
-    margin-bottom: 10px;
-    font-size: 14px;
+  .v-modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
