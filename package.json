@@ -41,13 +41,24 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended",
       "@vue/prettier"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier": [
+        "warn",
+        {
+          "semi": false,
+          "singleQuote": true,
+          "printWidth": 100,
+          "tabWidth": 2,
+          "arrowParens": "avoid"
+        }
+      ]
+    },
     "overrides": [
       {
         "files": [

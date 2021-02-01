@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div>Приввввввееет {{ userData.login }}</div>
+    <div>Лови список твоих дел</div>
+    <ul>
+      <TaskItem v-for="task of taskList" :key="task.id" :status="task.status" :title="task.title" />
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapState, mapGetters } from 'vuex'
+import TaskItem from '@/views/home/TaskItem'
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
+  name: 'Home',
+  components: { TaskItem },
+  computed: {
+    ...mapState(['taskList']),
+    userData() {
+      return JSON.parse(sessionStorage.getItem('user-data'))
+    }
   }
-};
+}
 </script>
