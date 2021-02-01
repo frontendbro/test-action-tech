@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>Приввввввееет {{ userData.login }}</div>
+    <div>Приввввввееет {{ userData.login }} привет</div>
     <div>Лови список твоих дел</div>
     <ul>
       <TaskItem v-for="task of taskList" :key="task.id" :status="task.status" :title="task.title" />
