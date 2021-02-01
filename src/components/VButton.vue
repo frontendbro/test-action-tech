@@ -100,8 +100,7 @@ export default {
 
 <style lang="less" scoped>
 .v-button {
-  height: 56px;
-  padding: 8px 0;
+  padding: 10px 12px;
   font-size: 16px;
   background: transparent;
   border: 0;

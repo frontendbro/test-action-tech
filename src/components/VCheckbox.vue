@@ -8,6 +8,7 @@
         v-bind="$attrs"
         v-on="inputListeners"
       />
+      <div v-if="checked" class="v-checkbox__icon">✓</div>
     </span>
     <span class="v-checkbox__text">{{ label }}</span>
   </label>
@@ -57,8 +58,17 @@ export default {
 .v-checkbox {
   display: flex;
   align-items: center;
-  width: max-content;
+  width: 16px;
   transition: 0.2s;
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #42b983;
+    color: #fff;
+  }
 }
 
 .v-checkbox__input {

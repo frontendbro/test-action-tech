@@ -4,7 +4,7 @@
       v-if="isOpen"
       class="fl-modal-layout"
       :class="{
-        'background':isBackground
+        background: isBackground
       }"
     >
       <div
@@ -21,26 +21,16 @@
         }"
         @keydown.esc="closeModal"
       >
-        <fl-icon
-          name="close"
-          class="fl-modal-header__close"
-          @click="closeModal"
-        />
+        <fl-icon name="close" class="fl-modal-header__close" @click="closeModal" />
         <div class="fl-modal-header">
           <fl-breadcrumbs
             v-if="listBreadcrumbs.length"
             :list-breadcrumbs="listBreadcrumbs"
           />
-          <h2
-            v-if="title"
-            class="fl-modal-title"
-          >
+          <h2 v-if="title" class="fl-modal-title">
             {{ title }}
           </h2>
-          <div
-            v-if="description"
-            class="fl-modal-description"
-          >
+          <div v-if="description" class="fl-modal-description">
             {{ description }}
           </div>
         </div>
