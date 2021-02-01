@@ -10,6 +10,7 @@
         :status="task.status"
         :title="task.title"
         :id="task.id"
+        :date="task.date"
       />
     </ul>
     <div v-else class="home-task-list_empty">Список задач пуст</div>
@@ -19,11 +20,16 @@
       <template #body>
         <div class="new-task-modal-body">
           <VInput class="new-task-modal__input" label="Название" v-model="newTaskTitle" />
+          <div class="new-task-modal-date">
+            <label class="new-task-modal-date__label">Дата окончания</label>
+            <input class="new-task-modal-date__input" type="date" v-model="newTaskDate" />
+          </div>
           <VButton
             class="new-task-modal__btn"
             title="Создать"
             type="is-primary"
             @click="createTask"
+            :disabled="!newTaskTitle.length"
           />
         </div>
       </template>
@@ -44,6 +50,7 @@ export default {
   data() {
     return {
       newTaskTitle: '',
+      newTaskDate: '',
       isOpen: false
     }
   },
@@ -56,7 +63,7 @@ export default {
   methods: {
     ...mapActions(['CreateTask']),
     createTask() {
-      this.CreateTask(this.newTaskTitle)
+      this.CreateTask({ title: this.newTaskTitle, date: this.newTaskDate })
       this.isOpen = false
       this.newTaskTitle = ''
     }
@@ -79,6 +86,7 @@ export default {
     }
   }
   &-task-list {
+    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -104,6 +112,28 @@ export default {
   &__btn {
     display: block;
     align-self: center;
+  }
+  &-date {
+    margin-bottom: 20px;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px transparent solid;
+    border-radius: 8px;
+    transition: 0.2s;
+    &__label {
+      color: #606060;
+      font-size: 12px;
+    }
+    &__input {
+      outline: none;
+    }
   }
 }
 </style>
